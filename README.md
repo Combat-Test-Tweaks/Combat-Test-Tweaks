@@ -13,7 +13,7 @@ The server's discord: https://discord.gg/Mj2ehN9XVN
 - Explosions do 0.5625 times the damage as in 1.16 (as a balance for nerfed protection)
 <a/>
 
-Note: Due to the way I've made the mod a lot of weapons do not show their accurate attack damage in-game. The only source with accurate information about weapon damage is this github page.
+Note: Since I'm new to fabric I didn't know how to change weapon damage in a proper way. Because of that most weapons do not show their accurate attack damage in-game. The only source with accurate information about weapon damage is this github page.
 ### Armor tweaks settings
 Armor tweaks settings (scoreboard values) used in Combat Tweaks server:  
 - armor.divisor armor.tweaks 30
