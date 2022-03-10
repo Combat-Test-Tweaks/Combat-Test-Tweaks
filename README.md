@@ -2,6 +2,7 @@
 Combat Tweaks is a combat test 8c mod and a fork of Armor Tweaks. The mod changes some combat mechanics and was created for a server I'm working on.
 The server's discord: https://discord.gg/Mj2ehN9XVN
 ### List of everything different from combat snapshot 8c:  
+Note: Since I'm pretty bad fabric the ways I used to implement weapon damage and strength changes aren't very good. Because of that tooltips do not show accurate weapon damage and strength damage. The only source with accurate information about weapon damage and strength damage is this github page.
 - Swords do the same amount of damage as in 1.16
 - Axes do 1 more damage than swords
 - Pickaxes do 1 less damage than swords
@@ -15,7 +16,6 @@ The server's discord: https://discord.gg/Mj2ehN9XVN
 - Strength gives +30% damage instead of +20%
 <a/>
 
-Note: Since I'm new to fabric and pretty bad at it, the ways I used to implement weapon damage and strength aren't very good. Because of that tooltips do not show accurate weapon damage and strength damage in-game. The only source with accurate information about weapon damage and strength damage is this github page.
 ### Armor tweaks settings
 Armor tweaks settings (scoreboard values) used in Combat Tweaks server:  
 - vanilla.armor armor.tweaks 1
