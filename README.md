@@ -15,7 +15,7 @@ The server's discord: https://discord.gg/Mj2ehN9XVN
 - Strength gives +30% damage instead of +20%
 <a/>
 
-Note: Since I'm new to fabric the ways I used to implement weapon damage and strength aren't really good. Because of that tooltips do not show accurate weapon damage and strength damage in-game. The only source with accurate information about weapon damage and strength damage is this github page.
+Note: Since I'm new to fabric the ways I used to implement weapon damage and strength aren't very good. Because of that tooltips do not show accurate weapon damage and strength damage in-game. The only source with accurate information about weapon damage and strength damage is this github page.
 ### Armor tweaks settings
 Armor tweaks settings (scoreboard values) used in Combat Tweaks server:  
 - vanilla.armor armor.tweaks 1
