@@ -3,10 +3,13 @@ package net.blumbo.armortweaks.mixin;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.scores.Objective;
 import net.minecraft.world.scores.Scoreboard;
@@ -30,18 +33,9 @@ public abstract class LivingEntityMixin extends Entity {
 
     // Armor and damage modifications  -----------------------------------------------------------
 
-    // Check for explosion
-    boolean isExplosion = false;
-    @Inject(method = "hurt", at = @At("HEAD"))
-    protected void hurt(DamageSource damageSource, float f, CallbackInfoReturnable<Boolean> cir) {
-        isExplosion = damageSource.isExplosion();
-    }
-
-    // Modify armor protection and crystal damage
+    // Modify armor protection and apply strength buff
     @Redirect(method = "getDamageAfterArmorAbsorb", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/CombatRules;getDamageAfterAbsorb(FFF)F"))
     protected float applyArmorToDamage(float damage, float armor, float armorToughness) {
-
-        if (this.isExplosion) damage *= 0.5625F; // 9 / 16
 
         if (useVanillaArmor()) {
             float mainFormula = armor - (4.0F * damage) / (8.0F + armorToughness);
@@ -70,7 +64,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     // Debug messages ----------------------------------------------------------------------------
 
-    // Code below sends a console message every time a living entity takes damage.
+    // Code below sends a message every time a living entity takes damage.
     // Displays damage before armor calculations, between armor and enchantment calculations and after all calculations.
 
     float base;
@@ -78,19 +72,19 @@ public abstract class LivingEntityMixin extends Entity {
     float enchantment;
 
     @Inject(at = @At("HEAD"), method = "getDamageAfterArmorAbsorb")
-    protected void baseDamageDebug(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
+    public void baseDamageMessage(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
         this.base = amount;
     }
     @Inject(at = @At("HEAD"), method = "getDamageAfterMagicAbsorb")
-    public void armorDamageDebug(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
+    public void armorDamageMessage(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
         this.armor = amount;
     }
     @Inject(at = @At("RETURN"), method = "getDamageAfterMagicAbsorb")
-    public void enchantmentDamageDebug(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
+    public void enchantmentDamageMessage(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
         this.enchantment = amount;
     }
     @Inject(at = @At("RETURN"), method = "hurt")
-    protected void sendDebug(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
+    protected void sendDamageMessage(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
         if (!sendDamageFeedback()) return;
 
         String message = "Base: " + base + " | Armor: " + armor + " | Enchantments: " + enchantment;

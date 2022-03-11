@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "LivingEntityMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "EndCrystalMixin",
+    "ExplosionMixin"
   ],
   "client": [
   ],
