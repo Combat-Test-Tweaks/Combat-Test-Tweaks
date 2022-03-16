@@ -22,3 +22,6 @@ Armor tweaks settings (scoreboard values) used in Combat Tweaks server:
 - vanilla.enchantment armor.tweaks 0
 - enchantment.nerf armor.tweaks 16
 - send.damage armor.tweaks -1
+<a/>
+More about armor tweaks:
+https://github.com/Blumbo/ArmorTweaks
