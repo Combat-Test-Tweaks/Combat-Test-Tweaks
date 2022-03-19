@@ -25,6 +25,8 @@ public abstract class WeaponTypeMixin{
 
     @Shadow @Final public static WeaponType TRIDENT;
 
+    @Shadow @Final public static WeaponType SHOVEL;
+
     // Buff weapon damage
     @Inject(method = "getDamage", at = @At("HEAD"), cancellable = true)
     public void getDamage(Tier tier, CallbackInfoReturnable<Float> cir) {
@@ -34,7 +36,10 @@ public abstract class WeaponTypeMixin{
         if (this.equals(SWORD)) cir.setReturnValue(tier.getAttackDamageBonus() + 3.0F);
         else if (this.equals(AXE)) cir.setReturnValue(tier.getAttackDamageBonus() + 4.0F);
         else if (this.equals(PICKAXE)) cir.setReturnValue(tier.getAttackDamageBonus() + 2.0F);
+        else if (this.equals(SHOVEL)) cir.setReturnValue(tier.getAttackDamageBonus() + 1.0F);
         else if (this.equals(TRIDENT)) cir.setReturnValue(6.0F);
+
+
 
     }
 
