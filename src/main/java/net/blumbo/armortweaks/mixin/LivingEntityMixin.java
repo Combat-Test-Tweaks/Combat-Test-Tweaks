@@ -33,9 +33,9 @@ public abstract class LivingEntityMixin extends Entity {
 
     // Armor and damage modifications  -----------------------------------------------------------
 
-    // Modify armor protection and apply strength buff
+    // Modify armor protection
     @Redirect(method = "getDamageAfterArmorAbsorb", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/CombatRules;getDamageAfterAbsorb(FFF)F"))
-    protected float applyArmorToDamage(float damage, float armor, float armorToughness) {
+    protected float getDamageAfterArmorAbsorb(float damage, float armor, float armorToughness) {
 
         if (useVanillaArmor()) {
             float mainFormula = armor - (4.0F * damage) / (8.0F + armorToughness);
@@ -49,7 +49,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     // Modify armor enchantment protection
     @Redirect(method = "getDamageAfterMagicAbsorb", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/CombatRules;getDamageAfterMagicAbsorb(FF)F"))
-    protected float applyEnchantmentsToDamage(float damage, float protection) {
+    protected float getDamageAfterMagicAbsorb(float damage, float protection) {
 
         if (useVanillaEnchantment()) {
             protection = Mth.clamp(protection, 0.0F, 20.0F);
@@ -62,10 +62,10 @@ public abstract class LivingEntityMixin extends Entity {
 
     }
 
-    // Debug messages ----------------------------------------------------------------------------
+    // Damage messages ----------------------------------------------------------------------------
 
-    // Code below sends a message every time a living entity takes damage.
-    // Displays damage before armor calculations, between armor and enchantment calculations and after all calculations.
+    // Sends a message every time a living entity takes damage.
+    // Displays damage before armor calculations, after armor calculations and after enchantment calculations
 
     float base;
     float armor;
@@ -85,22 +85,16 @@ public abstract class LivingEntityMixin extends Entity {
     }
     @Inject(at = @At("RETURN"), method = "hurt")
     protected void sendDamageMessage(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
-        if (!sendDamageFeedback()) return;
+        if (!sendDamageToChat()) return;
 
         String message = "Base: " + base + " | Armor: " + armor + " | Enchantments: " + enchantment;
-        System.out.println(message);
+        message = "\2477" + message.replaceAll("\\|", "\2478|\2477");
 
-        if (sendDamageToChat()) {
-            message = "\2477" + message.replaceAll("\\|", "\2478|\2477");
-
-            UUID uuid = getUUID();
-            if (getType() == EntityType.PLAYER) {
-                this.sendMessage(new TextComponent("\247c[\uD83D\uDEE1] " + message), uuid);
-            }
-            if (lastDamageSource != null && lastDamageSource.getEntity() instanceof Player) {
-                lastDamageSource.getEntity().sendMessage(new TextComponent("\247b[\uD83D\uDDE1] " + message), uuid);
-            }
-
+        if (getType() == EntityType.PLAYER) {
+            this.sendMessage(new TextComponent("\247c[\uD83D\uDEE1] " + message), getUUID());
+        }
+        if (lastDamageSource != null && lastDamageSource.getEntity() instanceof Player) {
+            lastDamageSource.getEntity().sendMessage(new TextComponent("\247b[\uD83D\uDDE1] " + message), uuid);
         }
 
     }
@@ -114,10 +108,6 @@ public abstract class LivingEntityMixin extends Entity {
         return scoreboard.getOrCreatePlayerScore(playerName, objective).getScore();
     }
 
-    // Scoreboard check for if damage values should be sent anywhere
-    protected boolean sendDamageFeedback() {
-        return !(getArmorTweakValue("send.damage") < 0);
-    }
     // Scoreboard check for if damage values should be sent to the chat
     protected boolean sendDamageToChat() {
         return getArmorTweakValue("send.damage") > 0;
