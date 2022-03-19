@@ -15,7 +15,7 @@ public abstract class EndCrystalMixin extends Entity {
         super(entityType, level);
     }
 
-    // Change explosion entity from "null" to end crystal
+    // Change explosion entity to end crystal ("null" in vanilla)
     @ModifyArg(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;explode(Lnet/minecraft/world/entity/Entity;DDDFLnet/minecraft/world/level/Explosion$BlockInteraction;)Lnet/minecraft/world/level/Explosion;"))
     protected Entity explode(Entity entity) {
         return this;

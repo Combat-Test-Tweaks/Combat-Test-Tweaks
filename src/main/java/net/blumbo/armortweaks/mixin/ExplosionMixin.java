@@ -19,7 +19,7 @@ public class ExplosionMixin {
 
     @Shadow @Final private DamageSource damageSource;
 
-    // Nerf damage if crystal/anchor/bed
+    // Nerf crystal and bed/anchor damage
     @ModifyArg(method = "explode", index = 1, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
     protected float explode(float damage) {
         if (source instanceof EndCrystal || damageSource instanceof BadRespawnPointDamage) damage *= 0.5625F;
