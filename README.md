@@ -2,22 +2,26 @@
 Combat Tweaks is a combat test 8c mod and a fork of Armor Tweaks. The mod changes some combat mechanics and was created for a server I'm working on.
 The server's discord: https://discord.gg/Mj2ehN9XVN
 ### List of everything different from combat snapshot 8c:  
+Note: Since I'm pretty bad fabric the ways I used to implement weapon damage and strength changes aren't very good. Because of that tooltips do not show accurate weapon damage and strength damage. The only source with accurate information about weapon damage and strength damage is this github page.
 - Swords do the same amount of damage as in 1.16
 - Axes do 1 more damage than swords
 - Pickaxes do 1 less damage than swords
 - Shovels do 1 less damage than pickaxes
 - Tridents do 8 damage instead of 7
-- Impaling has been nerfed: First enchantment level gives +2 damage in water, each next enchantment gives +1
-- Enchantment calculations use the (15/(15+x)) formula instead of (1-x/25) where x is enchantment protection
+- Sharpness has been buffed: Each level gives +1 damage instead of +1 for first level and +0.5 for each next level
+- Impaling has been nerfed: Each level gives +1.5 damage instead of +2.5
+- Enchantment calculations use (16/(16+x)) as the formula instead of (1-x/25) where x is enchantment protection
 - Enchantment protection is no longer capped at 20
-- Explosions do 0.5625 times the damage as in 1.16 (as a balance for nerfed protection)
+- All explosions besides creepers do 0.5625 times the damage as in 1.16 (as a balance for nerfed protection)
+- Strength gives +30% damage instead of +20%
 <a/>
 
-Note: Due to the way I've made the mod a lot of weapons do not show their accurate attack damage in-game. The only source with accurate information about weapon damage is this github page.
 ### Armor tweaks settings
 Armor tweaks settings (scoreboard values) used in Combat Tweaks server:  
-- armor.divisor armor.tweaks 30
-- enchantment.nerf armor.tweaks 15
 - vanilla.armor armor.tweaks 1
 - vanilla.enchantment armor.tweaks 0
+- enchantment.nerf armor.tweaks 16
 - send.damage armor.tweaks -1
+<a/>
+More about armor tweaks:
+https://github.com/Blumbo/ArmorTweaks
