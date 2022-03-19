@@ -23,5 +23,6 @@
   "depends": {
     "fabricloader": ">=0.12.12",
     "minecraft": "1.16.3-combat.8.c"
-  }
+  },
+  "accessWidener" : "armortweaks.accesswidener"
 }
