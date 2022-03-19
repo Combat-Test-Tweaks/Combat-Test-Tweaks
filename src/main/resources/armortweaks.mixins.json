@@ -5,9 +5,12 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "LivingEntityMixin",
-    "PlayerMixin",
     "EndCrystalMixin",
-    "ExplosionMixin"
+    "ExplosionMixin",
+    "WeaponTypeMixin",
+    "ImpalingMixin",
+    "DamageEnchantmentMixin",
+    "AttackDamageMobEffectMixin"
   ],
   "client": [
   ],
